@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>关于我</title>
+    <link rel="stylesheet" href="../static/css/blog.css">
+</head>
+<body>
+{{template "block/nav.html" .}}
+
+<div id="about-me">
+    <div>
+        <img src="https://avatars1.githubusercontent.com/u/22284676?s=460&v=4">
+
+        <div id="myt">
+            <p class="myp">
+                <a href="javascript:">微信：{{.weChat}}</a>
+            </p>
+            <p class="myp">
+                <a href="javascript:">QQ：{{.qq}}</a>
+            </p>
+            <p class="myp">
+                <a href="https://github.com/{{.github}}" target="_blank">GitHub：{{.github}}</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

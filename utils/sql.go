@@ -12,6 +12,7 @@ var db *sql.DB
 
 func InitMysql() {
 	fmt.Println("InitMysql......")
+
 	driverName := beego.AppConfig.String("driverName")
 
 	// 注册数据库驱动
@@ -36,6 +37,8 @@ func InitMysql() {
 		CreateTableWithUser()
 		// 创建文章表
 		CreateTableWithArticle()
+		// 创建图片表
+		CreateTableWithAlbum()
 	}
 }
 
@@ -56,19 +59,19 @@ func ModifyDB(sql string, args ...interface{}) (int64, error) {
 
 // 创建用户表
 func CreateTableWithUser() {
-	sql := `CREATE TABLE IF NOT EXISTS users(
+	s := `CREATE TABLE IF NOT EXISTS users(
 		id INT(4) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 		username VARCHAR(64),
 		password VARCHAR(64),
 		status INT(4),
 		create_time INT(10)
 		);`
-	ModifyDB(sql)
+	ModifyDB(s)
 }
 
 // 创建文章表
 func CreateTableWithArticle() {
-	sql := `CREATE TABLE IF NOT EXISTS article(
+	s := `CREATE TABLE IF NOT EXISTS article(
 		id INT(4) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 		title VARCHAR(30),
 		author VARCHAR(20),
@@ -77,7 +80,7 @@ func CreateTableWithArticle() {
 		content LONGTEXT,
 		create_time INT(10)
 		);`
-	ModifyDB(sql)
+	ModifyDB(s)
 }
 
 // 查询
@@ -87,4 +90,16 @@ func QueryRowDB(sql string) *sql.Row {
 
 func QueryDB(sql string) (*sql.Rows, error) {
 	return db.Query(sql)
+}
+
+// 图片
+func CreateTableWithAlbum() {
+	s := `CREATE TABLE IF NOT EXISTS album(
+		id INT(4) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+		filepath VARCHAR(255),
+		filename VARCHAR(64),
+		status INT(4),
+		create_time INT(10)
+		);`
+	ModifyDB(s)
 }

@@ -37,15 +37,15 @@ $('#register-form').validate({
             url: urlStr,
             type: 'post',
             dataType: 'json',
-            success(data, status) {
+            success(data) {
                 layer.msg(data.message);
                 if (data.code === 1) {
                     setTimeout(() => {
                         window.location.href = '/login';
-                    }, 100);
+                    }, 200);
                 }
             },
-            error(data, status) {
+            error(data) {
                 layer.msg(data.message);
             }
         });
@@ -81,15 +81,15 @@ $('#login-form').validate({
             url: urlStr,
             type: 'post',
             dataType: 'json',
-            success(data, status) {
+            success(data) {
                 layer.msg(data.message);
                 if (data.code === 1) {
                     setTimeout(() => {
                         window.location.href = '/';
-                    }, 100);
+                    }, 200);
                 }
             },
-            error(data, status) {
+            error(data) {
                 layer.msg(data.message);
             }
         });
@@ -133,16 +133,46 @@ $('#write-art-form').validate({
             url: urlStr,
             type: 'post',
             dataType: 'json',
-            success(data, status) {
+            success(data) {
                 layer.msg(data.message);
                 setTimeout(() => {
                     window.location.href = '/';
-                }, 100);
+                }, 200);
             },
-            error(data, status) {
-                alert('err:' + data.message + ':' + status);
+            error(data) {
                 layer.msg(data.message);
             }
         });
     }
+});
+
+// 文件
+$('#album-upload-button').on('click', () => {
+    const fileData = $('#album-upload-file').val();
+    if (fileData.length <= 0) {
+        layer.alert('请选择文件', {icon: 5});
+        return;
+    }
+    const fd = new FormData();
+    fd.append('upload', $('#album-upload-file')[0].files[0]);
+    const urlStr = '/upload';
+    $.ajax({
+        url: urlStr,
+        type: 'post',
+        dataType: 'json',
+        contentType: false,
+        data: fd,
+        processData: false,
+        success(data) {
+            layer.msg(data.message);
+            if (data.code === 1) {
+                setTimeout(() => {
+                    window.location.href = '/album';
+                }, 200);
+            }
+        },
+        error(data, status) {
+            layer.msg(data.message);
+        }
+    });
 });

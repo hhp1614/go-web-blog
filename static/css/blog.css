@@ -29,7 +29,7 @@
 
 #main.home-main {
     /*margin-top: 83px;*/
-    padding: 20px;
+    padding: 10px;
 }
 
 .error {
@@ -69,7 +69,7 @@ body {
 }
 
 .global-color {
-    color: #72BCB5;
+    color: #ffffffaa;
 }
 
 /*导航-------------------------------------------------------------------------------------------------------*/
@@ -233,6 +233,7 @@ body {
     height: 640px;
     font-size: 0;
     /*position: relative;*/
+    z-index: 30;
 }
 
 

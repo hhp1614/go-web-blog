@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/astaxie/beego"
 	"hhp1614/myblog/utils"
+	"log"
 	"strconv"
 )
 
@@ -135,19 +136,6 @@ func QueryArticlesWithTag(tag string) ([]Article, error) {
 	sql += " OR tags LIKE '" + tag + "&%'"
 	sql += " OR tags LIKE '" + tag + "'"
 	fmt.Println(sql)
-	// sql: like
-
-	/*
-		tags: http&web&socket&互联网&计算机
-			http&web
-			web&socket&互联网&计算机
-			web
-
-		%&web&%		%代表任何内容都可以匹配
-		%&web
-		web&%
-		web
-	*/
 	return QueryArticlesWithCon(sql)
 }
 
@@ -156,4 +144,30 @@ func UpdateArticle(article Article) (int64, error) {
 	// 数据库操作
 	return utils.ModifyDB("UPDATE article SET title=?,tags=?,short=?,content=? WHERE id=?",
 		article.Title, article.Tags, article.Short, article.Content, article.Id)
+}
+
+// ---------- 删除文章 ----------
+func DeleteArticle(artID int) (int64, error) {
+	i, err := deleteArticleWithId(artID)
+	SetArticleRowsNum()
+	return i, err
+}
+
+func deleteArticleWithId(artID int) (int64, error) {
+	return utils.ModifyDB("DELETE FROM article WHERE id=?", artID)
+}
+
+// 查询标签，返回一个字段的列表
+func QueryArticleWithParam(param string) []string {
+	rows, err := utils.QueryDB(fmt.Sprintf("SELECT %s FROM article", param))
+	if err != nil {
+		log.Println(err)
+	}
+	var paramList []string
+	for rows.Next() {
+		arg := ""
+		rows.Scan(&arg)
+		paramList = append(paramList, arg)
+	}
+	return paramList
 }
