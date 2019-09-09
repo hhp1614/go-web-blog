@@ -37,3 +37,49 @@ go-web-blog
 │      
 └─views // 视图
 ```
+
+## 效果预览
+
+- 注册
+
+![注册](./readme/register.png)
+
+- 登录
+
+![登录](./readme/login.png)
+
+- 首页-未登录
+
+![首页-未登录](./readme/home-unlogin.png)
+
+- 首页-已登录
+
+![首页-已登录](./readme/home-login.png)
+
+- 写文章
+
+![写文章](./readme/add-article.png)
+
+- 显示文章内容
+
+![显示文章内容](./readme/article-detail.png)
+
+- 更新文章内容
+
+![更新文章内容](./readme/edit-article.png)
+
+- 标签页
+
+![标签页](./readme/tags.png)
+
+- 标签页详情
+
+![标签页详情](./readme/tags-detail.png)
+
+- 相册
+
+![相册](./readme/album.png)
+
+- 关于我
+
+![关于我](./readme/about.png)
